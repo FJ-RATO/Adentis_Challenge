@@ -1,18 +1,21 @@
-public class Product {
+public class Product extends Item{
   
     private String name;
     private String category; //change to enum
-    private Double weight;
-    private Double price;
+    private double weight;
+    private double price;
     private Data data;
 
-    public Product(String name, String category, Double weight, Double price, Data data) {
+
+    public Product(String name, String category, double weight, double price, Data data, double cost, int shipping_fee, int tax_amount) {
+        super(cost,shipping_fee,tax_amount);
         this.name = name;
         this.category = category;
         this.weight = weight;
         this.price = price;
         this.data = data;
     }
+    
 
     public String getName() {
         return this.name;
