@@ -1,19 +1,18 @@
-public class Product extends Item{
+public class Product {
   
     private String name;
     private String category; //change to enum
     private double weight;
     private double price;
-    private Data data;
+    private Date date;
 
 
-    public Product(String name, String category, double weight, double price, Data data, double cost, int shipping_fee, int tax_amount) {
-        super(cost,shipping_fee,tax_amount);
+    public Product(String name, String category, double weight, double price, Date date) {
         this.name = name;
         this.category = category;
         this.weight = weight;
         this.price = price;
-        this.data = data;
+        this.date = date;
     }
     
 
@@ -33,7 +32,7 @@ public class Product extends Item{
         return this.price;
     }
 
-    public Data getData() {
-        return this.data;
+    public Date getDate() {
+        return this.date;
     }
 }
