@@ -22,7 +22,7 @@ These entities are all related: one order contains several items and each item h
 -  ...
 
 **Item**: information about the purchased item 
-- cos
+- cost
 - shipping fee
 - tax amount
 - ...
