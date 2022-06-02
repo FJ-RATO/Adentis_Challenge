@@ -1,7 +1,9 @@
 import java.util.*;
+import java.util.Date;
+
 public class Orders {
     public static void main(String[] args) {
-        
+        Date today = new Date();
         List<Order> list_orders = new ArrayList<Order>();
 
         //Creates 100 random orders with 4 items each
@@ -15,7 +17,7 @@ public class Orders {
             } 
         }
         
-        //Receive the inputs
+        //Receive the inputs (PUT IN A FUNCTION)
         String start[] = args[0].split(" ");
         String finish[] = args[1].split(" ");
         
@@ -25,28 +27,33 @@ public class Orders {
         String finish_date[] = finish[0].split("-");
         String finish_hour[] = finish[1].split(":");
 
-        Date startdate = new Date(Integer.parseInt(start_date[0]), Integer.parseInt(start_date[1]), Integer.parseInt(start_date[2]), Integer.parseInt(start_hour[0]), Integer.parseInt(start_hour[1]), Integer.parseInt(start_hour[2]));
-        Date finishdate = new Date(Integer.parseInt(finish_date[0]), Integer.parseInt(finish_date[1]), Integer.parseInt(finish_date[2]), Integer.parseInt(finish_hour[0]), Integer.parseInt(finish_hour[1]), Integer.parseInt(finish_hour[2]));
+        Dates startdate = new Dates(Integer.parseInt(start_date[0]), Integer.parseInt(start_date[1]), Integer.parseInt(start_date[2]), Integer.parseInt(start_hour[0]), Integer.parseInt(start_hour[1]), Integer.parseInt(start_hour[2]));
+        Dates finishdate = new Dates(Integer.parseInt(finish_date[0]), Integer.parseInt(finish_date[1]), Integer.parseInt(finish_date[2]), Integer.parseInt(finish_hour[0]), Integer.parseInt(finish_hour[1]), Integer.parseInt(finish_hour[2]));
 
         //Search in interval
-
-        List<Order> filtered = new ArrayList<Order>();
+        int f1_3=0;
+        int f4_6=0;
+        int f7_12=0;
+        int f12=0;
+        int today_stamp = (int)today.getTime();
         Iterator<Order> iterator = list_orders.iterator();
         while (iterator.hasNext()){
             Order order = iterator.next();
             if(order.getdate().between(startdate, finishdate)){
-                filtered.add(order);
+                if((today_stamp - 31556926) =< order.getdate().getTimestamp())
+                    f12++; //checks for items older than 12 months
+                if(((today_stamp - 13148720) =< order.getdate().getTimestamp()) && ((today_stamp - 31556926) > order.getdate().getTimestamp()))
+                    f7_12++; //checks for items older than 7 months and younger than 7
             }
         }    
-
-        System.out.print(filtered.size());
+        
     
     }
 
     // gives a random date between 2017/2021
-    public static Date random(){
-        Date random = new Date(
-            (int)(Math.random()*5 + 2017),
+    public static Dates random(){
+        Dates random = new Dates(
+            (int)(Math.random()*1 + 2021),
             (int)(Math.random()*12 +1),
             (int)(Math.random()*28+1),
             (int)(Math.random()*24),
