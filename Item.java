@@ -6,7 +6,7 @@ public class Item extends Product{
     private int quantity;
 
 
-    public Item(int shipping_fee, int tax_amount,int quantity,String name, String category, double weight, double price, Date date) {
+    public Item(int shipping_fee, int tax_amount,int quantity,String name, String category, double weight, double price, Dates date) {
         super(name, category, weight, price, date);
         this.cost = price*quantity;
         this.shipping_fee = shipping_fee;

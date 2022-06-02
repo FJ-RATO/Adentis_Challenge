@@ -4,10 +4,10 @@ public class Product {
     private String category; //change to enum
     private double weight;
     private double price;
-    private Date date; //date of creation of the product
+    private Dates date; //date of creation of the product
 
 
-    public Product(String name, String category, double weight, double price, Date date) {
+    public Product(String name, String category, double weight, double price, Dates date) {
         this.name = name;
         this.category = category;
         this.weight = weight;
@@ -32,7 +32,7 @@ public class Product {
         return this.price;
     }
 
-    public Date getDate() {
+    public Dates getDate() {
         return this.date;
     }
 }

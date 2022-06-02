@@ -5,10 +5,10 @@ public class Order {
         private int c_contact; //customer contact
         private String shipping_address; 
         private double grand_total = 0;
-        private Date date; //creation date
+        private Dates date; //creation date
         private List<Item> items = new ArrayList<Item>();
 
-        public Order(String name, int contact, String shipping_address, Date date) {
+        public Order(String name, int contact, String shipping_address, Dates date) {
                 this.c_name = name;
                 this.c_contact = contact;
                 this.shipping_address = shipping_address;
@@ -20,7 +20,7 @@ public class Order {
                 this.grand_total = this.grand_total + item.getCost();
         }
 
-        public Date getdate(){
+        public Dates getdate(){
                 return this.date;
         }        
 }
