@@ -30,7 +30,17 @@ public class Orders {
 
         //Search in interval
 
-        //Filter
+        List<Order> filtered = new ArrayList<Order>();
+        Iterator<Order> iterator = list_orders.iterator();
+        while (iterator.hasNext()){
+            Order order = iterator.next();
+            if(order.getdate().between(startdate, finishdate)){
+                filtered.add(order);
+            }
+        }    
+
+        System.out.print(filtered.size());
+    
     }
 
     // gives a random date between 2017/2021
