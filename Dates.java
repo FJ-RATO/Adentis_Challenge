@@ -1,4 +1,4 @@
-public class Date {
+public class Dates {
     private int year;
     private int month;
     private int day;
@@ -7,7 +7,7 @@ public class Date {
     private int second;
     private int timestamp;
 
-    public Date(int year, int month, int day, int hour, int minute, int second) {
+    public Dates(int year, int month, int day, int hour, int minute, int second) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -15,10 +15,9 @@ public class Date {
         this.minute = minute;
         this.second = second;
         this.timestamp = (this.getYear()-1970)*31556926 + this.getMonth()*2419200 + this.getDay()*86400 + this.hour*3600 + this.minute*60 +this.second;
-
     }
 
-    public boolean between(Date start, Date end){
+    public boolean between(Dates start, Dates end){
         if((start.getTimestamp() <= this.timestamp) && (end.getTimestamp() >= this.timestamp))
             return true;
         return false;
