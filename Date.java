@@ -45,8 +45,6 @@ public class Date {
         return this.second;
     }
 
-
-
     @Override
     public String toString() {
         return "{" +

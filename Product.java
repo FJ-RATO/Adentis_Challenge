@@ -4,7 +4,7 @@ public class Product {
     private String category; //change to enum
     private double weight;
     private double price;
-    private Date date;
+    private Date date; //date of creation of the product
 
 
     public Product(String name, String category, double weight, double price, Date date) {
