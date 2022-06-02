@@ -5,6 +5,7 @@ public class Date {
     private int hour;
     private int minute;
     private int second;
+    private int timestamp;
 
     public Date(int year, int month, int day, int hour, int minute, int second) {
         this.year = year;
@@ -13,8 +14,15 @@ public class Date {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
+        this.timestamp = (this.getYear()-1970)*31556926 + this.getMonth()*2419200 + this.getDay()*86400 + this.hour*3600 + this.minute*60 +this.second;
+
     }
 
+    public boolean between(Date start, Date end){
+        if((start.getTimestamp() <= this.timestamp) && (end.getTimestamp() >= this.timestamp))
+            return true;
+        return false;
+    }
 
     public int getYear() {
         return this.year;
@@ -45,6 +53,9 @@ public class Date {
         return this.second;
     }
 
+    public int getTimestamp(){
+        return this.timestamp;
+    }
     @Override
     public String toString() {
         return "{" +
