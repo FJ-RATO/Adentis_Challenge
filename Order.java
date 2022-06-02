@@ -22,5 +22,9 @@ public class Order {
 
         public Dates getdate(){
                 return this.date;
-        }        
+        }
+        
+        public List<Item> getItems(){
+                return this.items;
+        }
 }
