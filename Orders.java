@@ -62,16 +62,13 @@ public class Orders {
         System.out.println("4-6 months: "+ f4_6);
         System.out.println("7-12 months: "+ f7_12);
         System.out.println("<12 months: "+ f12);
-
-        Dates hoje = new Dates(2022, 6, 2, 19, 54, 0);
-        System.out.println(hoje.getTimestamp());
     
     }
 
     // gives a random date between 2017/2021
     public static Dates random(){
         Dates random = new Dates(
-            2022,
+            2021,
             (int)(Math.random()*12 +1),
             (int)(Math.random()*28+1),
             (int)(Math.random()*24),
