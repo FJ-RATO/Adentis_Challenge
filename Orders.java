@@ -20,7 +20,6 @@ public class Orders {
         new Dates(2021, 5, 15, 00, 00, 00),
         new Dates(2021, 4, 15, 00, 00, 00),
         };        
-        System.out.println(year[1].toString());
         //Creates 10000 random orders with 12 items each
         
         for(int i = 0; i <= 9999; i++){
@@ -60,6 +59,7 @@ public class Orders {
         Date today = new Date();
         long today_stamp = today.getTime()/1000; //Date.getTime returns a timestamp in ms we want s
 
+        
         Iterator<Order> iterator_order = list_orders.iterator();
         while (iterator_order.hasNext()){
             Order order = iterator_order.next();
