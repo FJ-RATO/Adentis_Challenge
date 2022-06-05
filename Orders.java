@@ -54,9 +54,10 @@ public class Orders {
         long today_stamp = today.getTime()/1000; //Date.getTime returns a timestamp in ms we want s
 
         if(args.length > 2){
+            String argument[] = args[2].split(",");
             HashMap<String, Integer> filter = new HashMap<String, Integer>();
-            for(int i = 2 ; i < args.length; i++){
-                filter.put(args[i],0);
+            for(int i = 0 ; i < argument.length; i++){
+                filter.put(argument[i],0);
             }
 
             Iterator<Order> iterator_order = list_orders.iterator();
@@ -67,20 +68,20 @@ public class Orders {
                     while(iterator_item.hasNext()){
                         Item item = iterator_item.next();
                         long dif = today_stamp - (int)item.getDate().getTimestamp();
-                        for(int i = 2; i < args.length; i++){
-                            int value = filter.get(args[i]);//gets the stored value
-                            String range[] = args[i].split("-");
+                        for(int i = 0; i < argument.length; i++){
+                            int value = filter.get(argument[i]);//gets the stored value
+                            String range[] = argument[i].split("-");
                             if((dif > Integer.parseInt(range[0])*2629743) && (dif <= Integer.parseInt(range[1])*2629743)){
                                 value++;
-                                filter.put(args[i],value);
+                                filter.put(argument[i],value);
                             }
                         }
                     }
                 }
             }
-            for(int i = 2 ; i < args.length; i++){
-                System.out.print(args[i]+" months: ");
-                System.out.print(filter.get(args[i])+"\n");
+            for(int i = 0 ; i < argument.length; i++){
+                System.out.print(argument[i]+" months: ");
+                System.out.print(filter.get(argument[i])+"\n");
             }
         }
         
