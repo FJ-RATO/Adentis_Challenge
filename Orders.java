@@ -1,12 +1,12 @@
 import java.util.*;
-import java.util.Date;
 
 public class Orders {
     public static void main(String[] args) {
 
         List<Order> list_orders = new ArrayList<Order>();
+        Date today = new Date();
 
-        Dates year[] = {
+        Dates year_simulation[] = {
         new Dates(2022, 3, 15, 00, 00, 00),
         new Dates(2022, 2, 15, 00, 00, 00),
         new Dates(2022, 1, 15, 00, 00, 00),
@@ -26,8 +26,8 @@ public class Orders {
             Order order = new Order("Francisco", 963474765, "UA", random());
             
             //Item x38randoms = new Item(14, 23, 38, "rand product", "Fruta", 15, 1, random());
-            for(int j = 0; j < year.length; j++ ){
-                Item x38randoms = new Item(14, 23, 38, "rand product", "Fruta", 15, 1, year[j]); 
+            for(int j = 0; j < year_simulation.length; j++ ){
+                Item x38randoms = new Item(14, 23, 38, "rand product", "Fruta", 15, 1, year_simulation[j]); 
                 order.add_item(x38randoms);   
             }  
             /*
@@ -51,41 +51,73 @@ public class Orders {
         String finish_hour[] = finish[1].split(":");
         Dates finishdate = new Dates(Integer.parseInt(finish_date[0]), Integer.parseInt(finish_date[1]), Integer.parseInt(finish_date[2]), Integer.parseInt(finish_hour[0]), Integer.parseInt(finish_hour[1]), Integer.parseInt(finish_hour[2]));
 
-        //Search in interval
-        int f1_3=0;
-        int f4_6=0;
-        int f7_12=0;
-        int f12=0;
-        Date today = new Date();
         long today_stamp = today.getTime()/1000; //Date.getTime returns a timestamp in ms we want s
 
-        
-        Iterator<Order> iterator_order = list_orders.iterator();
-        while (iterator_order.hasNext()){
-            Order order = iterator_order.next();
-            if(order.getdate().between(startdate, finishdate)){
-                Iterator<Item> iterator_item = order.getItems().iterator();
-                while(iterator_item.hasNext()){
-                    Item item = iterator_item.next();
-                    long dif = today_stamp - (int)item.getDate().getTimestamp();
+        if(args.length > 2){
+            HashMap<String, Integer> filter = new HashMap<String, Integer>();
+            for(int i = 2 ; i < args.length; i++){
+                filter.put(args[i],0);
+            }
 
-                    if(dif <= 2629743*3)
-                        f1_3++;
-                    if((dif <= 2629743*6) && (dif > 2629743*3))
-                        f4_6++;
-                    if((dif <= 2629743*12) && (dif > 2629743*6))
-                        f7_12++;
-                    if((dif >= 2629743*12))
-                        f12++;
+            Iterator<Order> iterator_order = list_orders.iterator();
+            while (iterator_order.hasNext()){
+                Order order = iterator_order.next();
+                if(order.getdate().between(startdate, finishdate)){
+                    Iterator<Item> iterator_item = order.getItems().iterator();
+                    while(iterator_item.hasNext()){
+                        Item item = iterator_item.next();
+                        long dif = today_stamp - (int)item.getDate().getTimestamp();
+                        for(int i = 2; i < args.length; i++){
+                            int value = filter.get(args[i]);//gets the stored value
+                            String range[] = args[i].split("-");
+                            if((dif > Integer.parseInt(range[0])*2629743) && (dif <= Integer.parseInt(range[1])*2629743)){
+                                value++;
+                                filter.put(args[i],value);
+                            }
+                        }
+                    }
                 }
             }
+            for(int i = 2 ; i < args.length; i++){
+                System.out.print(args[i]+" months: ");
+                System.out.print(filter.get(args[i])+"\n");
+            }
         }
+        
+        if(args.length == 2){
+            //Search in interval
+            int f1_3=0;
+            int f4_6=0;
+            int f7_12=0;
+            int f12=0;
+            
 
-        System.out.println("1-3 months: "+ f1_3);
-        System.out.println("4-6 months: "+ f4_6);
-        System.out.println("7-12 months: "+ f7_12);
-        System.out.println("<12 months: "+ f12);
-    
+            Iterator<Order> iterator_order = list_orders.iterator();
+            while (iterator_order.hasNext()){
+                Order order = iterator_order.next();
+                if(order.getdate().between(startdate, finishdate)){
+                    Iterator<Item> iterator_item = order.getItems().iterator();
+                    while(iterator_item.hasNext()){
+                        Item item = iterator_item.next();
+                        long dif = today_stamp - (int)item.getDate().getTimestamp();
+
+                        if(dif <= 2629743*3)
+                            f1_3++;
+                        if((dif <= 2629743*6) && (dif > 2629743*3))
+                            f4_6++;
+                        if((dif <= 2629743*12) && (dif > 2629743*6))
+                            f7_12++;
+                        if((dif >= 2629743*12))
+                            f12++;
+                    }
+                }
+            }
+
+            System.out.println("1-3 months: "+ f1_3);
+            System.out.println("4-6 months: "+ f4_6);
+            System.out.println("7-12 months: "+ f7_12);
+            System.out.println("<12 months: "+ f12);
+        }
     }
 
     // gives a random date
